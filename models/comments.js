@@ -35,19 +35,18 @@ Comment.init(
       },
     },
   },
+
+  //possible to add hooks here
   {
-    // Configure the model to use the Sequelize instance 'sequelize'
+ 
     sequelize,
-    // Disable timestamps (createdAt and updatedAt columns)
-    timestamps: false,
-    // Freeze the table name to prevent it from being pluralized
+    timestamps: true,
     freezeTableName: true,
-    // Use underscores in column names (e.g., 'blog_id' instead of 'blogId')
     underscored: true,
-    // Set the model name to 'comment'
     modelName: "comment",
   }
 );
+
 
 // Export the Comment model so that it can be used in other parts of the application
 module.exports = Comment;
