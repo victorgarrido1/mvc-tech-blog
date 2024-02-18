@@ -19,7 +19,8 @@ router.post('/', async (req, res) => {
   //this route post is for the login in page is located
   router.post('/login', async (req, res) => {
     try {
-      const newUser = await User.findOne({ where: { email: req.body.email } });
+      console.log(newUser)
+      const newUser = await User.findOne({ where: { username: req.body.username } });
   
       if (!newUser) {
         res
