@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
     }
   });
   
-  // If a POST request is made to /api/users/login, the function checks to see if the user information matches the information in the database and logs the user in. If correct, the user ID and logged-in state are saved to the session within the request object.
+  //this route post is for the login in page is located
   router.post('/login', async (req, res) => {
     try {
       const newUser = await User.findOne({ where: { email: req.body.email } });

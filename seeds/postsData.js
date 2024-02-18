@@ -15,7 +15,7 @@ const postData = [
   {
     title: "Tech Talk With Tech Timmy",
     description:
-      "After a long wait, Tech Tim recently shared his new thoughts about AI and what I can bring to the table",
+      "After a long wait, Tech Tim recently shared his new thoughts about AI and what it can bring to the table",
     user_id: 2,
   },
   {
