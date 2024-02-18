@@ -5,4 +5,9 @@ const homeRoutes = require("./home-routes");
 router.use("/api", apiRoutes);
 router.use("/", homeRoutes);
 //export module
+
+
+
+
+//export the router
 module.exports = router;

@@ -15,4 +15,6 @@ router.get('/', async (req, res) => {
 });
 
 //get one post by the ID association with username and comments
-router
+
+//exports the router
+module.exports = router;
