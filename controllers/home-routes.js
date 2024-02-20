@@ -109,24 +109,6 @@ router.get("/signup", (req, res) => {
   console.log(req.session.logged_in);
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // render a new post page
 router.get("/newpost", (req, res) => {
   if (req.session.logged_in) {
