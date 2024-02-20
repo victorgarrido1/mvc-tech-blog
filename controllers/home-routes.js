@@ -103,8 +103,10 @@ router.get("/signup", (req, res) => {
   if (req.session.logged_in) {
     res.redirect("/dashboard");
     return;
+    
   }
-  res.redirect("signup");
+  res.render("signup");
+  console.log(req.session.logged_in);
 });
 
 

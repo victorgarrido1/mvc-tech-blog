@@ -1,4 +1,5 @@
 //signup request
+console.log("signup.js");
 const techSignupFromHandler = async (event) => {
   event.preventDefault();
 
@@ -17,6 +18,7 @@ const techSignupFromHandler = async (event) => {
       document.location.replace("/");
     } else {
       alert("Failed to sign up");
+      
     }
   }
 };
