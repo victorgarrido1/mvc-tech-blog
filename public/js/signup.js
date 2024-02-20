@@ -17,5 +17,10 @@ const techSignupFromHandler = async (event) => {
   }
 };
 
+const techSignupForm = document.querySelector("#signup-form");
+if (techSignupForm) {
+  techSignupForm.addEventListener("submit", techSignupFromHandler);
+}
+
 
 console.log(techSignupFromHandler);
