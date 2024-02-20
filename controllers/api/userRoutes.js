@@ -36,26 +36,24 @@ router.post("/login", async (req, res) => {
     const validPassword = newUser.checkPassword(req.body.password);
 
     if (!validPassword) {
-      res
+      return res
         .status(400)
         .json({ message: "Incorrect email or password, please try again" });
     }
-
+    console.log(validPassword);
     req.session.save(() => {
       req.session.user_id = newUser.id;
       req.session.logged_in = true;
 
-      res.redirect('/')
-      // (200)
-        // .json({ user: newUser, message: "You are now logged in!" });
+      res
+        .status(200)
+        .json({ user: newUser, message: "You are now logged in!" });
     });
   } catch (err) {
     res.status(400).json(err);
     console.log(newUser);
   }
 });
-
-
 
 // If a POST request is made to /api/users/logout, the function checks the logged_in state in the request.session object and destroys that session if logged_in is true.
 router.post("/logout", (req, res) => {
@@ -66,15 +64,14 @@ router.post("/logout", (req, res) => {
   } else {
     res.status(404).end();
   }
-  // req.session.destroy(() => {
-  //   res.status(204).end();
-  // });
+
 });
 
-router.get('/seeall', async (req, res) => {
+//for testing 
+router.get("/seeall", async (req, res) => {
   const users = await User.findAll();
-res.status(200).json(users);
-})
+  res.status(200).json(users);
+});
 
 //exports the router
 module.exports = router;
