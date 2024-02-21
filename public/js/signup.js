@@ -1,5 +1,4 @@
 //signup request
-console.log(signup.js)
 const techSignupFromHandler = async (event) => {
   event.preventDefault();
 
@@ -13,7 +12,12 @@ const techSignupFromHandler = async (event) => {
       body: JSON.stringify({ username, email, password }),
       headers: { "Content-Type": "application/json" },
     });
-
+    if (response.ok) {
+      document.location.replace("/");
+    } else {
+      alert("Failed to sign up");
+      
+    }
   }
 };
 
