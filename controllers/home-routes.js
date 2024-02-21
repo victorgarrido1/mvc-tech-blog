@@ -70,23 +70,20 @@ router.get("/dashboard", withAuth, async (req, res) => {
   }
 });
 
-//using the withAuth middleware to prevent access to the route from the user
-router.get("/dashboard", withAuth, async (req, res) => {
-  try {
-    const postData = await Blog.findAll({
-      where: { user_id: req.session.user_id },
-      include: [{ model: User, attributes: ["username"] }],
-    });
-    const posts = postData.map((blog) => blog.get({ plain: true }));
-    // Pass the posts array to the dashboard view, not 'blog'
-    res.render("dashboard", {
-      posts, // Corrected from 'blog' to 'posts'
-      logged_in: req.session.logged_in,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+router.get("/t")
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 router.get("/login", (req, res) => {
   // req.session.logged_in = false// for testing ;
@@ -98,12 +95,10 @@ router.get("/login", (req, res) => {
   res.render("login");
 });
 
-
 router.get("/signup", (req, res) => {
   if (req.session.logged_in) {
     res.redirect("/dashboard");
     return;
-    
   }
   res.render("signup");
   console.log(req.session.logged_in);
