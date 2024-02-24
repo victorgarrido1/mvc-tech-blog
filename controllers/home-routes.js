@@ -70,6 +70,17 @@ router.get("/post/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
+router.get("/signup", (req, res) => {
+  // Check if the user is already logged in
+  if (req.session.logged_in) {
+    // If user is already logged in, redirect to some other page
+    res.redirect("/dashboard"); // Example: redirecting to dashboard if logged in
+  } else {
+    // If user is not logged in, render the signup page
+    res.render("signup"); // Assuming "signup" is the name of your signup view/template
+  }
+});
+
 
 //We need to create a route for the post//
 router.get("/t");

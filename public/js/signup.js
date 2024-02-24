@@ -27,4 +27,4 @@ if (techSignupForm) {
 }
 
 
-console.log(techSignupFromHandler);
+console.log(techSignupForm);
