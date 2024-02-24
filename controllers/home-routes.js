@@ -39,29 +39,6 @@ router.get("/post/:id", async (req, res) => {
 
     if (postData) {
       const post = postData.get({ plain: true });
-      router.get("/post/:id", async (req, res) => {
-        try {
-          const postData = await Blog.findByPk(req.params.id, {
-            include: [
-              User,
-              {
-                model: Comment,
-                include: [User],
-              },
-            ],
-          });
-
-          if (postData) {
-            const post = postData.get({ plain: true });
-
-            res.render("post", { post, loggedIn: req.session.logged_in });
-          } else {
-            res.status(404).end();
-          }
-        } catch (err) {
-          res.status(500).json(err);
-        }
-      });
       res.render("post", { post, loggedIn: req.session.logged_in });
     } else {
       res.status(404).end();
@@ -70,6 +47,7 @@ router.get("/post/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 router.get("/signup", (req, res) => {
   // Check if the user is already logged in
   if (req.session.logged_in) {
@@ -80,10 +58,6 @@ router.get("/signup", (req, res) => {
     res.render("signup"); // Assuming "signup" is the name of your signup view/template
   }
 });
-
-
-//We need to create a route for the post//
-router.get("/t");
 
 router.get("/login", (req, res) => {
   // req.session.logged_in = false// for testing ;
@@ -113,7 +87,6 @@ router.get("/newpost", (req, res) => {
   res.redirect("/login");
 });
 
-
 //to be able to get them to sign up?
 router.get("/login", (req, res) => {
   if (req.session.session_logged_in) {
@@ -122,32 +95,6 @@ router.get("/login", (req, res) => {
 });
 
 
-//route to for the edit post page
-// Route to render the edit post page
-router.get("/editpost/:id", async (req, res) => {
-  try {
-    // Find the blog post by its primary key (id)
-    const postData = await Blog.findByPk(req.params.id, {
-      // Include associated data: user who authored the post and comments on the post
-      include: [
-        { model: User, attributes: ["username"] }, // Include user data with username attribute
-        {
-          model: Comments, // Include associated comments
-          include: [{ model: User, attributes: ["username"] }], // Include user data for each comment
-        },
-      ],
-    });
 
-    const post = postData.get({ plain: true });
-
-    // Render the edit post page and pass retrieved data to the template
-    //possible needs to be changed
-    res.render("editpost", { postData });
-  } catch (err) {
-    // Handle errors
-    console.error("Error fetching blog post data:", err);
-    res.status(500).json({ err: "Failed to retrieve blog post data" });
-  }
-});
 
 module.exports = router;
