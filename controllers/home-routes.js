@@ -25,7 +25,7 @@ router.get("/", async (req, res) => {
 });
 
 // Route to render individual post page
-router.get('/post/:id', async (req, res) => {
+router.get("/post/:id", async (req, res) => {
   try {
     const postData = await Blog.findByPk(req.params.id, {
       include: [
@@ -39,7 +39,7 @@ router.get('/post/:id', async (req, res) => {
 
     if (postData) {
       const post = postData.get({ plain: true });
-      router.get('/post/:id', async (req, res) => {
+      router.get("/post/:id", async (req, res) => {
         try {
           const postData = await Blog.findByPk(req.params.id, {
             include: [
@@ -50,11 +50,11 @@ router.get('/post/:id', async (req, res) => {
               },
             ],
           });
-      
+
           if (postData) {
             const post = postData.get({ plain: true });
-      
-            res.render('post', { post, loggedIn: req.session.logged_in });
+
+            res.render("post", { post, loggedIn: req.session.logged_in });
           } else {
             res.status(404).end();
           }
@@ -62,7 +62,7 @@ router.get('/post/:id', async (req, res) => {
           res.status(500).json(err);
         }
       });
-      res.render('post', { post, loggedIn: req.session.logged_in });
+      res.render("post", { post, loggedIn: req.session.logged_in });
     } else {
       res.status(404).end();
     }
@@ -72,34 +72,21 @@ router.get('/post/:id', async (req, res) => {
 });
 
 //We need to create a route for the post//
-router.get("/t")
-
-
-
-
-
-
-
-
-
-
-
-
-
+router.get("/t");
 
 router.get("/login", (req, res) => {
   // req.session.logged_in = false// for testing ;
   if (req.session.logged_in) {
-    res.redirect("/dashboard");
+    res.redirect("/signup");
     return;
   }
 
   res.render("login");
 });
 
-router.get("/signup", (req, res) => {
+router.get("/dashboard", (req, res) => {
   if (req.session.logged_in) {
-    res.redirect("/dashboard");
+    res.redirect("/signup");
     return;
   }
   res.render("signup");
@@ -114,6 +101,15 @@ router.get("/newpost", (req, res) => {
   }
   res.redirect("/login");
 });
+
+
+//to be able to get them to sign up?
+router.get("/login", (req, res) => {
+  if (req.session.session_logged_in) {
+    res.render("signup");
+  }
+});
+
 
 //route to for the edit post page
 // Route to render the edit post page
