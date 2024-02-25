@@ -26,14 +26,14 @@ Comment.init(
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
-    // Define the 'blog_id' attribute as an integer with a foreign key constraint referencing the 'id' column of the 'user' model
-    blog_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: "user",
-        key: "id",
-      },
-    },
+    // // Define the 'blog_id' attribute as an integer with a foreign key constraint referencing the 'id' column of the 'user' model
+    // blog_id: {
+    //   type: DataTypes.INTEGER,
+    //   references: {
+    //     model: "user",
+    //     key: "id",
+    //   },
+    // },
   },
 
   //possible to add hooks here

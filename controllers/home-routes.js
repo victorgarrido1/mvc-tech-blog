@@ -39,6 +39,7 @@ router.get("/post/:id", async (req, res) => {
 
     if (postData) {
       const post = postData.get({ plain: true });
+      console.log(post);
       res.render("post", { post, loggedIn: req.session.logged_in });
     } else {
       res.status(404).end();
@@ -48,6 +49,25 @@ router.get("/post/:id", async (req, res) => {
   }
 });
 
+// Route to render dashboard page with all posts by current user
+// Find all posts by current user with associated usernames
+router.get("/dashboard", withAuth, async (req, res) => {
+  try {
+    const postData = await Post.findAll({
+      where: { user_id: req.session.logged_in },
+      include: [{ model: User, attributes: ["username"] }],
+    });
+    // Convert post data to plain JavaScript object
+    const posts = postData.map((post) => post.get({ plain: true }));
+
+    res.render("dashboard", {
+      posts,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 router.get("/signup", (req, res) => {
   // Check if the user is already logged in
   if (req.session.logged_in) {
@@ -93,6 +113,10 @@ router.get("/login", (req, res) => {
     res.render("signup");
   }
 });
+
+router.get("/dashboard", (req, res) => {
+
+})
 
 
 
