@@ -53,7 +53,7 @@ router.get("/post/:id", async (req, res) => {
 // Find all posts by current user with associated usernames
 router.get("/dashboard", withAuth, async (req, res) => {
   try {
-    const postData = await Post.findAll({
+    const postData = await Blog.findAll({
       where: { user_id: req.session.logged_in },
       include: [{ model: User, attributes: ["username"] }],
     });
@@ -65,7 +65,8 @@ router.get("/dashboard", withAuth, async (req, res) => {
       logged_in: req.session.logged_in,
     });
   } catch (err) {
-    res.status(500).json(err);
+    console.log(err);
+   res.status(500).json(err);
   }
 });
 router.get("/signup", (req, res) => {
@@ -113,12 +114,6 @@ router.get("/login", (req, res) => {
     res.render("signup");
   }
 });
-
-router.get("/dashboard", (req, res) => {
-
-})
-
-
 
 
 module.exports = router;
