@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { Blog, User, Comments } = require("../../models");
 const withAuth = require("../../utils/auth");
-const { route } = require("./userroutes");
+const { route } = require("./userRoutes");
 
 //this is to get all of the x
 router.get("/", async (req, res) => {
@@ -39,10 +39,12 @@ router.get("/:id", async (req, res) => {
 
 // Create a new post with authenticated user
 router.post("/", withAuth, async (req, res) => {
+  console.log(req.body);
   try {
-    const newPost = await Post.create({
-      ...req.body,
+    console.log("success");
+    const newPost = await Blog.create({
       user_id: req.session.user_id,
+      ...req.body,
     });
     res.status(200).json(newPost);
   } catch (err) {

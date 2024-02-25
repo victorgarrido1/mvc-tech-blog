@@ -54,19 +54,19 @@ router.get("/post/:id", async (req, res) => {
 router.get("/dashboard", withAuth, async (req, res) => {
   try {
     const postData = await Blog.findAll({
-      where: { user_id: req.session.logged_in },
+      where: { user_id: req.session.user_id },
       include: [{ model: User, attributes: ["username"] }],
     });
     // Convert post data to plain JavaScript object
     const posts = postData.map((post) => post.get({ plain: true }));
-
+    console.log(posts);
     res.render("dashboard", {
       posts,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
     console.log(err);
-   res.status(500).json(err);
+    res.status(500).json(err);
   }
 });
 router.get("/signup", (req, res) => {
@@ -90,19 +90,22 @@ router.get("/login", (req, res) => {
   res.render("login");
 });
 
-router.get("/dashboard", (req, res) => {
-  if (req.session.logged_in) {
-    res.redirect("/signup");
-    return;
-  }
-  res.render("signup");
-  console.log(req.session.logged_in);
-});
+// router.get("/dashboard", (req, res) => {
+//   if (!req.session.logged_in) {
+//     res.redirect("/signup");
+//     return;
+//   }
+//   res.render("signup");
+//   console.log(req.session.logged_in);
+// });
+
 
 // render a new post page
 router.get("/newpost", (req, res) => {
   if (req.session.logged_in) {
-    res.render("newpost");
+    res.render("newpost", {
+      logged_in: req.session.logged_in,
+    });
     return;
   }
   res.redirect("/login");
@@ -114,6 +117,5 @@ router.get("/login", (req, res) => {
     res.render("signup");
   }
 });
-
 
 module.exports = router;
