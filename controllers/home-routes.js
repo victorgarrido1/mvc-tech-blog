@@ -39,7 +39,6 @@ router.get("/post/:id", async (req, res) => {
 
     if (postData) {
       const post = postData.get({ plain: true });
-      console.log(post);
       res.render("post", { post, loggedIn: req.session.logged_in });
     } else {
       res.status(404).end();
@@ -59,7 +58,6 @@ router.get("/dashboard", withAuth, async (req, res) => {
     });
     // Convert post data to plain JavaScript object
     const posts = postData.map((post) => post.get({ plain: true }));
-    console.log(posts);
     res.render("dashboard", {
       posts,
       logged_in: req.session.logged_in,
@@ -99,7 +97,6 @@ router.get("/login", (req, res) => {
 //   console.log(req.session.logged_in);
 // });
 
-
 // render a new post page
 router.get("/newpost", (req, res) => {
   if (req.session.logged_in) {
@@ -110,6 +107,38 @@ router.get("/newpost", (req, res) => {
   }
   res.redirect("/login");
 });
+
+
+// render an edit post page
+router.get("/editpost/:id", async (req, res) => {
+  try {
+    const postData = await Blog.findByPk(req.params.id, {
+      include: [
+        { model: User, attributes: ["username"] },
+        {
+          model: Comments,
+          include: [{ model: User, attributes: ["username"] }],
+        },
+      ],
+    });
+
+    if (!postData) {
+      res.status(404).json({ message: "No post found with this id" });
+      return;
+    }
+
+    const post = postData.get({ plain: true });
+
+    res.render("editpost", {
+      post,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 
 //to be able to get them to sign up?
 router.get("/login", (req, res) => {

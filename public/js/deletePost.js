@@ -15,6 +15,7 @@ const deletedPost = async (post_id) => {
   } catch (error) {
     // Code to handle network errors or other exceptions
     alert("Failed to delete the post.");
+    console.log(error);
   }
 };
 
