@@ -8,6 +8,8 @@ They can use this site to sign up for a account and share their own Blogs on the
 <img width="1658" alt="mvc_tech" src="https://github.com/victorgarrido1/mvc-tech-blog/assets/139294878/5e1aad28-9fce-41ec-b29e-84e0020a3797">
 
 
+Link for the deployed application on Heroku:
+[https://infinite-waters-64757-7e304ec66236.herokuapp.com/]
 
 ## What I've learned from this Project
 This project helped me with a great grasp of understanding of the handlebar template language to be able to move between page to page. Using the syntax that handlebars has helped me understand how it connects with the Sequelize data and how we hash out passwords for the safety of the user and how the page works whenever as a developer the logic of employing logic to be able to move page to page and how it can be used to data how we'd like to manipulate it. With this tech blog site. The user does have a ability to be able to share comments alongside editing the page and as well as deleting the post completely from the blog.
