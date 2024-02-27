@@ -1,4 +1,5 @@
 const deletedPost = async (post_id) => {
+ 
   try {
     const response = await fetch(`/api/posts/${post_id}`, {
       method: "DELETE",
@@ -6,11 +7,15 @@ const deletedPost = async (post_id) => {
     });
 
     if (response.ok) {
+      document.location.replace("/dashboard"); //When good, load dashboard
       // Code to handle successful response
+
       console.log(response);
     } else {
       // Code to handle unsuccessful response
+      console.log(response);
       throw new Error("Failed to delete the post.");
+    
     }
   } catch (error) {
     // Code to handle network errors or other exceptions

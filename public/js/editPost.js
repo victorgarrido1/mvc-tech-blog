@@ -1,5 +1,5 @@
 //get the post ID from the endpoint
-const post_id = window.location.pathname.split("/")[2]
+const post_id = window.location.pathname.split("/")[2];
 
 //Update the post
 const updateTechPostFormHandler = async (event) => {
@@ -15,10 +15,8 @@ const updateTechPostFormHandler = async (event) => {
       method: "PUT",
       body: JSON.stringify({ title, content }),
       headers: { "Content-Type": "application/json" },
-
     });
- 
-// console.log(response);
+
     if (response.ok) {
       document.location.replace("/dashboard"); //When good, load dashboard
     } else {
