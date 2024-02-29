@@ -18,7 +18,9 @@ const hbs = exphbs.create({ helpers });
 // Configuration object for Express session middleware
 const sess = {
   secret: 'Super secret secret',  // Secret used to sign the session ID cookie
-  cookie: {},                      // Configuration options for the session cookie (empty in this case)
+  cookie: {
+    maxAge: 3600000     //6 mins
+  },                      // Configuration options for the session cookie (empty in this case)
   resave: false,                   // Forces the session to be saved back to the session store, even if the session was never modified during the request
   saveUninitialized: true,         // Forces a session that is "uninitialized" to be saved to the store. A session is uninitialized when it is new but not modified.
   store: new SequelizeStore({      // Using Sequelize as the session store

@@ -39,7 +39,7 @@ router.get("/post/:id", async (req, res) => {
 
     if (postData) {
       const post = postData.get({ plain: true });
-      res.render("post", { post, loggedIn: req.session.logged_in });
+      res.render("post", { post, logged_in: req.session.logged_in });
     } else {
       res.status(404).end();
     }
@@ -56,6 +56,7 @@ router.get("/dashboard", withAuth, async (req, res) => {
       where: { user_id: req.session.user_id },
       include: [{ model: User, attributes: ["username"] }],
     });
+    console.log(req.session)
     // Convert post data to plain JavaScript object
     const posts = postData.map((post) => post.get({ plain: true }));
     res.render("dashboard", {
